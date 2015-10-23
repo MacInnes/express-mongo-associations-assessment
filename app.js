@@ -14,6 +14,8 @@ var playlists = db.get('playlists');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var songRoutes = require('./routes/songs');
+var albumRoutes = require('./routes/albums');
+var artistRoutes = require('./routes/artists')
 var playlistRoutes = require('./routes/playlists');
 
 var app = express();
@@ -33,7 +35,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/songs', songRoutes);
+app.use('/albums', albumRoutes);
+app.use('/artists', artistRoutes);
 app.use('/playlists', playlistRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
