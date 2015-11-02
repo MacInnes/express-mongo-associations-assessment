@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cookieSession = require('cookie-session')
 var db = require('monk')('localhost/monk-associations-assessment');
 var songs = db.get('songs');
 var albums = db.get('albums');
@@ -23,6 +24,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set('trust proxy', 1);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -38,6 +40,10 @@ app.use('/songs', songRoutes);
 app.use('/albums', albumRoutes);
 app.use('/artists', artistRoutes);
 app.use('/playlists', playlistRoutes);
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 
 
 // catch 404 and forward to error handler

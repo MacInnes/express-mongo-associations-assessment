@@ -3,3 +3,10 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  //once lib db functions declared and implemented, show playlists here
+
+  form(method='post' action='')
+    label Please add a Playlist name:
+      input(type='text' name='playlist')
+    button(type='submit') Submit

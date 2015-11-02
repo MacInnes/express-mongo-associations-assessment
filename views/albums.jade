@@ -3,3 +3,11 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  //once lib db functions declared and implemented, show albums here
+  h1 #{artist}
+  form(method='post' action='')
+    label Please add an Album:
+      input(type='text' name='album')
+    select()
+    button(type='submit') Submit
