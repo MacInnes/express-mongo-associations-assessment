@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 #{name}
+
+  each song in songs
+    p #{song.name}
+
+  a(href='/playlists/' + id + '/edit') Edit Playlist

@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1 #{name}
+
+  form(method='post' action='')
+    input(type='hidden' name='playlistID' value= id)
+    input(type='hidden' name='totalSongs' value= songs.length)
+    label Please add a Playlist name:
+      input(type='text' name='playlist' value= name)
+    table
+      tr
+        th Song name:
+        th Add to playlist?
+          -for(var i = 0; i < songs.length; i++){
+            -var checked = false;
+            -for (var j = 0; j < oldSongs.length; j++){
+              -if (songs[i].name == oldSongs[j].name){
+                -checked = true;
+              -}
+            -}
+            -if(checked === true){
+              tr
+                td #{songs[i].name}
+                td
+                  input(type='checkbox' name='song' + (i + 1) value= songs[i]._id checked)
+            -} else {
+                tr
+                  td #{songs[i].name}
+                  td
+                    input(type='checkbox' name='song' + (i + 1) value= songs[i]._id)
+            -}
+          -}
+        
+    button(type='submit') Submit

@@ -5,8 +5,25 @@ block content
   p Welcome to #{title}
 
   //once lib db functions declared and implemented, show playlists here
+  if playlists
+    each playlist in playlists
+      h4
+        a(href='/playlists/' + playlist._id) #{playlist.name}
 
-  form(method='post' action='')
+
+  form(method='post' action='/')
+    input(type='hidden' name='totalSongs' value= songs.length)
     label Please add a Playlist name:
       input(type='text' name='playlist')
+    table
+      tr
+        th Song name:
+        th Add to playlist?
+      -for (var i = 0; i < songs.length; i++){
+        tr
+          td #{songs[i].name}
+          td
+            input(type='checkbox' name='song' + (i + 1) value= songs[i]._id)
+      -}
+        
     button(type='submit') Submit

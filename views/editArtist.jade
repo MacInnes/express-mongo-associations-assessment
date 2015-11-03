@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  form(method='post' action='/artists/edit/' + artist._id)
+    label Edit Artist Name:
+      input(type='text' name="artist" value= artist.artist)
+    button(type='submit') Update
+  a(href='/artists/delete' + artist._id) Delete Artist

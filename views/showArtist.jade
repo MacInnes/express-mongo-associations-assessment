@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 #{artist.artist}
+  div
+    a(href='/artists/edit/' + artist._id) Edit artist
+  div
+    a(href='/' + artist._id + '/albums') Add an album

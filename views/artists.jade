@@ -4,29 +4,11 @@ block content
   h1= title
   p Welcome to #{title}
 
-  if errors
-    each error in errors
-      p(id='errors') #{error}
-
-  form(method='post' action='')
-    if artists.length
-      label Please select an Artist:
-        select(id='artistSelect' name='artistSelectBox')
-          option(value='none' selected) None
-            each artist in artists
-              option(value= artist.artist) #{artist.artist}
-    div(id='artist')
-      label Or add a new Artist:
-        input(type='text' name='artist')
-    div
-      label Album:
-        input(type='text' name='album')
-    div
-      label Number of tracks:
-        select(id='albumLength')
-          -for(var i = 0; i <= 30; i++){
-            option(value= i id='track') #{i}
-          -}
-    div(id='songs')
-    div
-      button(type='submit') Submit
+  table
+    tr
+      th Artist:
+    if artists  
+      each artist in artists
+          tr
+            td 
+              a(href='/artists/' + artist._id) #{artist.artist}

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 #{album.album}
+
+  form(method='post' action='/album/edit')
+    input(type='hidden' name='albumLength' value= album.songs.length)
+    input(type='hidden' name='albumID' value= album.albumID)
+    label Album name:
+      input(type='text' name='album' value= album.album)
+    -for (var i = 0; i < album.songs.length; i++){
+      div
+        label Song:
+          input(type='hidden' name='songID' + (i + 1) value= album.songs[i]._id)
+          input(type='text' name='song' + (i + 1) value= album.songs[i].name)
+    -}
+    button(type='submit') Update
+
+
