@@ -5,5 +5,7 @@ block content
 
   each song in songs
     p #{song.name}
-
-  a(href='/playlists/' + id + '/edit') Edit Playlist
+  div
+    a(href='/playlists/' + id + '/edit') Edit Playlist
+  div
+    a(href='/playlists/' + id + '/delete') Delete Playlist

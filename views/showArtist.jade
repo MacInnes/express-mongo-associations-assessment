@@ -2,6 +2,9 @@ extends layout
 
 block content
   h1 #{artist.artist}
+  each album in albums
+    h4
+      a(href='/album/edit/' + album._id) #{album.name}
   div
     a(href='/artists/edit/' + artist._id) Edit artist
   div

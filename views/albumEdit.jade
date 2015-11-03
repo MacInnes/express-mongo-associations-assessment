@@ -15,5 +15,6 @@ block content
           input(type='text' name='song' + (i + 1) value= album.songs[i].name)
     -}
     button(type='submit') Update
-
+  div
+    a(href='/album/delete/' + album.albumID) Delete Album
 

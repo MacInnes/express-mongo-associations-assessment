@@ -28,7 +28,7 @@ router.get('/:id/albums', function(req, res, next){
 })
 
 //:id is album id for editing
-router.get('/:id/album/edit', function(req, res, next){
+router.get('/album/edit/:id', function(req, res, next){
   dbcalls.findAlbumByID(req.params.id).then(function(data){
     var outputObject = {albumID: req.params.id, album: data.name, songs: []};
     dbcalls.findSongsByAlbum(data._id).then(function(data){
@@ -38,6 +38,30 @@ router.get('/:id/album/edit', function(req, res, next){
       console.log(outputObject);
       res.render('albumEdit', {album: outputObject})
     })
+  })
+})
+
+router.get('/album/delete/:id', function(req, res, next){
+  dbcalls.findSongsByAlbum(req.params.id).then(function(data){
+    console.log('----FIND SONGS----')
+    console.log(data);
+    var songsPromisesArray = data.map(function(each){
+      return dbcalls.deleteSong(each._id);
+    })
+    var playlistPromisesArray = data.map(function(each){
+      console.log(each._id);
+      return dbcalls.findPlaylistBySong(each._id);
+    })
+    Promise.all(playlistPromisesArray).then(function(data){
+      console.log('-----PLAYLIST PROMISES------')
+      console.log(data);
+      Promise.all(songsPromisesArray).then(function(data){
+        dbcalls.deleteAlbum(req.params.id).then(function(data){
+          res.redirect('/')
+        })
+      })
+    })
+    
   })
 })
 

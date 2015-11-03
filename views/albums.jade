@@ -9,7 +9,7 @@ block content
   if albums.albums
     each album in albums.albums
       h4
-        a(href='/' + album._id + '/album/edit') #{album.name}
+        a(href='/album/edit/' + album._id) #{album.name}
   form(method='post' action='/albums')
     label Please add an Album:
       input(type='text' name='album')

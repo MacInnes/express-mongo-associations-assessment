@@ -4,13 +4,8 @@ var dbcalls = require('../lib/dbcalls');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // lib file db function to retrieve all playlists goes here
-  
-  dbcalls.findAllPlaylists().then(function(data){
-    var playlists = data;
-    dbcalls.findAllSongs().then(function(data){
-      res.render('playlists', { title: 'PLAYLISTS', songs: data, playlists: playlists });
-    })
+  dbcalls.getPlaylists().then(function (outputObject) {
+    res.render('playlists', { title: 'PLAYLISTS', songs: outputObject, playlists: outputObject.playlists});
   })
 });
 
@@ -71,5 +66,17 @@ router.post('/:id/edit', function(req, res, next){
     res.redirect('/');
   })
 })
+
+router.get('/:id/delete', function(req, res, next){
+  dbcalls.deletePlaylist(req.params.id).then(function(data){
+    res.redirect('/');
+  })
+})
+
+
+
+
+
+
 
 module.exports = router;

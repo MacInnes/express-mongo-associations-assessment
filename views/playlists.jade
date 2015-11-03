@@ -1,29 +1,34 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 Playlists:
 
   //once lib db functions declared and implemented, show playlists here
   if playlists
-    each playlist in playlists
+    each playlist in songs.playlists
       h4
         a(href='/playlists/' + playlist._id) #{playlist.name}
 
 
   form(method='post' action='/playlists')
-    input(type='hidden' name='totalSongs' value= songs.length)
+    input(type='hidden' name='totalSongs' value= songs.songs.length)
     label Please add a Playlist name:
       input(type='text' name='playlist')
     table
       tr
-        th Song name:
+        th Artist:
+        th Album:
+        th Song:
         th Add to playlist?
-      -for (var i = 0; i < songs.length; i++){
+      -for (var i = 0; i < songs.songs.length; i++){
         tr
-          td #{songs[i].name}
+          td #{songs.artists[i].artist}
           td
-            input(type='checkbox' name='song' + (i + 1) value= songs[i]._id)
+            if songs.albums[i]
+              = songs.albums[i].name
+          td #{songs.songs[i].name}
+          td
+            input(type='checkbox' name='song' + (i + 1) value= songs.songs[i]._id)
       -}
         
     button(type='submit') Submit

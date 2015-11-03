@@ -1,17 +1,16 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
 
+  if errors
+    each error in errors
+      h4(id='error') #{error}
   if artists
-    table
-      tr
-        th Artist:    
-      each artist in artists
-          tr
-            td 
-              a(href='/artists/' + artist._id) #{artist.artist}
+    h1 Artists:    
+    each artist in artists
+      div
+        h4
+          a(href='/artists/' + artist._id) #{artist.artist}
   div
     form(method='post' action='/artists')
       label Add an Artist:
