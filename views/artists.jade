@@ -4,11 +4,16 @@ block content
   h1= title
   p Welcome to #{title}
 
-  table
-    tr
-      th Artist:
-    if artists  
+  if artists
+    table
+      tr
+        th Artist:    
       each artist in artists
           tr
             td 
               a(href='/artists/' + artist._id) #{artist.artist}
+  div
+    form(method='post' action='/artists')
+      label Add an Artist:
+        input(type='text' name='artist') 
+      button(type='submit') Submit

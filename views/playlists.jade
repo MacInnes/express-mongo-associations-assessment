@@ -11,7 +11,7 @@ block content
         a(href='/playlists/' + playlist._id) #{playlist.name}
 
 
-  form(method='post' action='/')
+  form(method='post' action='/playlists')
     input(type='hidden' name='totalSongs' value= songs.length)
     label Please add a Playlist name:
       input(type='text' name='playlist')
